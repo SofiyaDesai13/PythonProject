@@ -82,7 +82,7 @@ class MyPythonCode(object):
                 drypt_data['data'][sops_key] = base64.b64decode(sops_val).decode('utf8')
                 if sops_key in output_scfile_data['data']:
                     drypt_data['data'][sops_key] = output_scfile_data['data'][sops_key]
-                drypt_data['data'][sops_key] = (drypt_data['data'][sops_key].encode('ascii'))
+                drypt_data['data'][sops_key] = (drypt_data['data'][sops_key].encode('asAWScii'))
                 drypt_data['data'][sops_key] = base64.b64encode(drypt_data['data'][sops_key]).decode('utf8')
             with open(self.decrypt_file, 'w') as decrypt_out_file:
                 json.dump(drypt_data, decrypt_out_file, indent=4)
