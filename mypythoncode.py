@@ -14,11 +14,11 @@ OutputSCJ2 = 'sdata.j2'
 
 class MyPythonCode(object):
     def __init__(
-            self, myjsonfile):
-        self._load_data(myjsonfile)
-        self.my_output_file = (f'{OutputDir}/output_file.json')
+            self, myjs):
+        self._load_data(myjs)
+        self.my_output_file = (f'{OutputDir}/myoutput.json')
         self.decrypt_file = (f'{OutputDir}/decrypt_file.yaml')
-        self.my_output_scfile = (f'{OutputDir}/output_scfile.json')
+        self.my_output_scfile = (f'{OutputDir}/myoutputsc.json')
     
     def _run_shell(self, cmd, use_shell=False):
         proc = Popen(cmd, shell=use_shell, stdin=PIPE, stdout=PIPE, stderr=PIPE)
@@ -28,10 +28,10 @@ class MyPythonCode(object):
             raise Exception(err.decode())
         return out.decode().replace('\n', '')
     
-    def _load_data(self, myjsonfile):
+    def _load_data(self, myjs):
         try:
-            with open(myjsonfile) as myjs:
-                self.myjs = json.load(myjs)
+            with open(myjs) as myjsondata:
+                self.myjsd = json.load(myjsondata)
         except Exception as e:
             print("Failed to load data")
             print(f"{e}")
@@ -53,7 +53,7 @@ class MyPythonCode(object):
 
     def _generate_output_file(self):
         jsonargs = {
-            'myjsondata': self.myjsonfile}
+            'myjsondata': self.myjsd}
         output_file_data = self._loadj2(OutputJ2, jsonargs)
         output_file_data = output_file_data['myj2data']
         try:
@@ -70,7 +70,7 @@ class MyPythonCode(object):
     def _generate_output_scfile(self):
         try:
             jsonargs = {
-                'myjsondata': self.myjsonfile}
+                'myjsondata': self.myjsd}
             output_scfile_data = self._loadj2(OutputSCJ2, jsonargs)
             os.mknod(self.decrypt_file)
             sopsDecryptcmd = (
@@ -103,7 +103,7 @@ class MyPythonCode(object):
 def _my_args():
     parser = argparse.ArgumentParser(
         description='Passing input arguments')
-    parser.add_argument('-p', '--myjsonfile',
+    parser.add_argument('-p', '--myjsondata',
                         required=True,
                         action='store',
                         help='my Json data file')
@@ -112,5 +112,5 @@ def _my_args():
 
 args = _my_args()
 MyPythonCode(
-    args['myjsonfile']
+    args['myjsondata']
     ).newgenerate()

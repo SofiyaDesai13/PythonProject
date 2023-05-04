@@ -1,0 +1,35 @@
+{
+    "myj2data": {
+        "userName": [
+            "Sofiya"
+        ],
+        "description": [
+            "Hello World! Its good to see you here."
+        ],
+        "global_components": [
+            {
+                "List_components": {
+                    "component1": "Python",
+                    "component2": "Shell",
+                    "component3": "J2",
+                    "component4": "Json"
+                }
+            }
+        ],
+        "mydata": [
+            {
+                "myip": "192.100.300.8",
+                "usernameinfo": "vaultusernameinfo",
+                "usersecretinfo": "vaultusersecretinfo",
+                "userAddress": "vaultuserAddress",
+                "userMobile": "vaultuserMobile",
+                "internaluser": {
+                    "internalip": "192.100.20.1.rsplit('.',1)[0]|string + \".70\" }}"
+                }
+            }
+        ],
+        "closure": [
+            "Hello World! Its json end here."
+        ]
+    }
+}
