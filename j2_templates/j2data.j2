@@ -9,15 +9,14 @@ myj2data:
       component3: {{myjsondata['serviceData'][0]['components_list'][0]['component3']}}
       component4: {{myjsondata['serviceData'][0]['components_list'][0]['component4']}}
   mydata:
-    myip: {myjsondata['serviceData'][0]['ipaddress']}}
+    myip: {{myjsondata['serviceData'][0]['ipaddress']}}
     usernameinfo: vaultusernameinfo
     usersecretinfo: vaultusersecretinfo
     userAddress: vaultuserAddress
     userMobile: vaultuserMobile
-    vaultuserMobile
     internaluser:
       internalip: {% if myjsondata['serviceData2'][0]['ipaddress'] is defined %}
-                  {{ {myjsondata['serviceData2'][0]['ipaddress']}}.rsplit('.',1)[0]|string + ".70" }}
-    }
+                  {{ myjsondata['serviceData2'][0]['ipaddress']}}.rsplit('.',1)[0]|string + ".70" }}
+                  {% endif %}
   closure: {{myjsondata['closure']}}
     
